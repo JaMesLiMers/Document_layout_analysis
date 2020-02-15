@@ -12,9 +12,10 @@ class ModelDataset(Dataset):
         # TODO add config file
         self.BLUR = 0.0
         self.FLIP = 0.0
-        self.COLOR = 0.0
+        self.COLOR = 1.0
         self.GRAY = 0.2
         self.SIZE = (400, 600)
+        self.MASK_SIZE = (185, 285)
         self.train = train
 
         # augumentation
@@ -64,7 +65,8 @@ class ModelDataset(Dataset):
                                                             self.SIZE,
                                                             gray=gray)
 
-            # compile
+             # compile
+            target_mask = cv2.resize(target_mask, self.MASK_SIZE)
             target_mask = np.where(target_mask, 1, 0)
             blank_mask = np.where(np.sum(target_mask, axis=2)==0, 1, 0)[:,:,np.newaxis]
             target_mask = np.dstack((blank_mask, target_mask))

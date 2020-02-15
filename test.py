@@ -8,6 +8,7 @@ import torch.nn as nn
 import numpy as np
 from backbone import DecoderNet, EncoderNet
 from Dataset import ModelDataset
+from model_load import remove_prefix
 
 # init train parameter
 SAVE_PATH = 'save'
@@ -32,6 +33,7 @@ train_loader = torch.utils.data.DataLoader(
 # 加载模型
 model = nn.Sequential(EncoderNet(),
                      DecoderNet(),)
+model.eval()
 
 def get_one_hot(label, N):
     size = list(label.size())
@@ -44,13 +46,17 @@ def get_one_hot(label, N):
 def save_image(img, num, dir):
     img = np.uint8(img) * 255
     # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) * 255
+    img = cv2.resize(img, (400, 600))
     cv2.imwrite(os.path.join(dir, 'result_{}.png'.format(num)), img)
 
 if SAVE_NAME:
     try:
-        model.load_state_dict(torch.load(os.path.join('.', 'save', SAVE_NAME)))
+        state_dict = torch.load(os.path.join('.', 'save', SAVE_NAME), map_location=torch.device('cpu'))
+        state_dict = remove_prefix(state_dict, 'module.')
+        model.load_state_dict(state_dict)
     except Exception as e:
         print(e)
+
 
 for num, i in enumerate(train_set):
     x = torch.Tensor(i['target_image'][np.newaxis, :, :, :])

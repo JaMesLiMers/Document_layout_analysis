@@ -2,7 +2,6 @@ import os
 import sys
 import time
 
-
 import torch
 import torch.nn as nn
 from backbone_second import DecoderNet, EncoderNet

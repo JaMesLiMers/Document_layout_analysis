@@ -47,7 +47,7 @@ def save_image(img, num, dir):
     img = np.uint8(img) * 255
     # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) * 255
     img = cv2.resize(img, (400, 600))
-    cv2.imwrite(os.path.join(dir, 'result_{}.png'.format(num)), img)
+    cv2.imwrite(os.path.join(dir, 'result_second_{}.png'.format(num)), img)
 
 if SAVE_NAME:
     try:
