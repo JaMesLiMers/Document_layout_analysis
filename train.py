@@ -17,7 +17,7 @@ from train_utils.average_meter_helper import AverageMeter
 # init train parameter
 NUM_WORKER = 16
 BATCH_SIZE = 8
-EPOCHE = 50
+EPOCHE = 10000
 LR = 0.001
 PRINT_FREQ = 20
 BOARD_PATH = 'board'
@@ -62,11 +62,11 @@ def freeze(target_module, train=False):
 model = nn.Sequential(EncoderNet(),
                      DecoderNet(),)
 
-try:
-    model.load_state_dict(torch.load(os.path.join('.', 'save', PRETRAIN)))
-except Exception as e:
-    print(e)
-# load_pretrain(model, os.path.join('.', 'save', PRETRAIN))
+# try:
+#     model.load_state_dict(torch.load(os.path.join('.', 'save', PRETRAIN)))
+# except Exception as e:
+#     print(e)
+load_pretrain(model, os.path.join('.', 'save', PRETRAIN))
 
 # freeze backbone
 if FREEZE:

@@ -130,4 +130,5 @@ dmypy.json
 
 Data/Annotations/*
 Data/Image/*
-save/*
+save/*.pkl
+save/*.pth
