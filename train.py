@@ -109,10 +109,10 @@ for epoch in range(EPOCHE):
         avg.update(step_time=step_time, train_loss=train_loss, train_metric=train_metric) # 算平均值
 
         # 打印结果
-        if (step+1) % print_freq == 0:
+        if (step+1) % PRINT_FREQ == 0:
                 global_logger.info('Epoch: [{0}][{1}/{2}] {step_time:s}\t{train_loss:s}\t{train_metric:s}'.format(
                             epoch+1, (step + 1) % train_lenth, train_lenth, step_time=avg.step_time, train_loss=avg.train_loss, train_metric=avg.train_metric))
-                print_speed(epoch*train_lenth + step + 1, avg.step_time.avg, epoches * train_lenth)
+                print_speed(epoch*train_lenth + step + 1, avg.step_time.avg, EPOCHE * train_lenth)
 
     # save model
     torch.save(model.state_dict(), os.path.join('.', SAVE_PATH, 'model_epoch_{}.pkl'.format(epoch)))

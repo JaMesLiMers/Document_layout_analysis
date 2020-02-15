@@ -11,7 +11,7 @@ from Dataset import ModelDataset
 
 # init train parameter
 SAVE_PATH = 'save'
-SAVE_NAME = 'model_epoch_10.pkl'
+SAVE_NAME = 'model_epoch_01.pkl'
 TARGET_IMAGE_PATH = 'test'
 
 # cuda
@@ -42,8 +42,9 @@ def get_one_hot(label, N):
     return ones.view(*size)
 
 def save_image(img, num, dir):
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) * 255
-    cv2.imwrite(os.path.join(dir, 'result_{}.jpg'.format(num)), img)
+    img = np.uint8(img) * 255
+    # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) * 255
+    cv2.imwrite(os.path.join(dir, 'result_{}.png'.format(num)), img)
 
 if SAVE_NAME:
     try:
@@ -55,10 +56,10 @@ for num, i in enumerate(train_set):
     x = torch.Tensor(i['target_image'][np.newaxis, :, :, :])
     output = model(x)
 
-    _, pred = torch.topk(output[:, 1::, :, :], 1, dim=1)
+    _, pred = torch.topk(output, 1, dim=1)
 
     # output = torch.squeeze(output).permute(1, 2, 0).detach().numpy()
-    output_onehot = get_one_hot(pred.squeeze(), 3)
-    output_onehot = output_onehot.permute(1,0,2).detach().numpy()
+    output_onehot = get_one_hot(pred.squeeze(), 4)
+    output_onehot = output_onehot[:,:,1::].permute(1,0,2).detach().numpy()
 
     save_image(output_onehot, num, dir=os.path.join('.', TARGET_IMAGE_PATH, 'Output'))
