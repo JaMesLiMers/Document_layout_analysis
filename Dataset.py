@@ -70,7 +70,7 @@ class ModelDataset(Dataset):
             target_mask = np.dstack((blank_mask, target_mask))
             target_mask = target_mask.transpose((2, 1, 0)).astype(np.float32)
         else:
-            target_image = cv2.resize(image, self.SIZE)
+            target_image = cv2.resize(target_image, self.SIZE)
 
         target_image = target_image.transpose((2, 1, 0)).astype(np.float32)
 

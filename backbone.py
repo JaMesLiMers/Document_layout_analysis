@@ -80,5 +80,5 @@ class DecoderNet(nn.Module):
         x = self.layer3(x)
         x = self.layer4(x)
         x = self.sigmoid(x)
-        y = nn.Softmax()(x)
+        y = nn.Softmax2d()(x)
         return y
