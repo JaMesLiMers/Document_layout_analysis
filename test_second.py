@@ -8,10 +8,11 @@ import torch.nn as nn
 import numpy as np
 from backbone_second import DecoderNet, EncoderNet
 from Dataset_second import ModelDataset
+from model_load import remove_prefix
 
 # init train parameter
 SAVE_PATH = 'save'
-SAVE_NAME = 'model_second_epoch_0.pkl'
+SAVE_NAME = 'model_second_epoch_59.pkl'
 TARGET_IMAGE_PATH = 'test'
 
 # cuda
@@ -32,6 +33,7 @@ train_loader = torch.utils.data.DataLoader(
 # 加载模型
 model = nn.Sequential(EncoderNet(),
                      DecoderNet(),)
+model.eval()
 
 def get_one_hot(label, N):
     size = list(label.size())
@@ -49,7 +51,9 @@ def save_image(img, num, dir):
 
 if SAVE_NAME:
     try:
-        model.load_state_dict(torch.load(os.path.join('.', 'save', SAVE_NAME)))
+        state_dict = torch.load(os.path.join('.', 'save', SAVE_NAME), map_location=torch.device('cpu'))
+        state_dict = remove_prefix(state_dict, 'module.')
+        model.load_state_dict(state_dict)
     except Exception as e:
         print(e)
 

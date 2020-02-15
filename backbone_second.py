@@ -46,7 +46,7 @@ class EncoderNet(nn.Module):
         return x
 
 class DecoderNet(nn.Module):
-    configs = [256, 96, 4]
+    configs = [256, 128, 64, 4]
 
     def __init__(self, width_mult=1):
         configs = list(map(lambda x: 3 if x == 3 else
@@ -62,13 +62,17 @@ class DecoderNet(nn.Module):
             nn.BatchNorm2d(configs[2]),
             nn.ReLU(inplace=True),
             )
+        self.layer3 = nn.Sequential(
+            nn.Conv2d(configs[2], configs[3], kernel_size=1),
+            nn.ReLU(inplace=True),
+            )
         self.sigmoid = nn.Sigmoid()
     def forward(self, x):
         x = self.layer1(x)
         x = self.layer2(x)
+        x = self.layer3(x)
         x = self.sigmoid(x)
-        y = nn.Softmax2d()(x)
-        return y
+        return x
 
 if __name__ == "__main__":
     test = torch.ones(1, 3, 400, 600)

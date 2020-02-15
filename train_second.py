@@ -9,20 +9,24 @@ from backbone_second import DecoderNet, EncoderNet
 from Dataset_second import ModelDataset
 
 import argparse
+from model_load import load_pretrain
 
 import logging
 from train_utils.log_helper import init_log, add_file_handler, print_speed
 from train_utils.average_meter_helper import AverageMeter
 
+# TODO add config file
 # init train parameter
 NUM_WORKER = 16
-BATCH_SIZE = 16
-EPOCHE = 50
-LR = 0.0001
+BATCH_SIZE = 8
+EPOCHE = 10000
+LR = 0.001
 PRINT_FREQ = 20
 BOARD_PATH = 'board'
 SAVE_PATH = 'save'
-PRETRAIN = 'alexnet_bn.pth'
+PRETRAIN = 'alexnet_bn_.pth'
+FREEZE = True
+START_BACKBONE = 40
 
 # 初始化logger
 global_logger = init_log('global', level=logging.INFO)
@@ -51,13 +55,25 @@ train_lenth = len(train_loader)
 
 global_logger.debug('==>>> total trainning batch number: {}'.format(train_lenth))
 
+def freeze(target_module, train=False):
+    for child in target_module.children():
+        for param in child.parameters():
+            param.requires_grad = train
+
 # 加载模型
 model = nn.Sequential(EncoderNet(),
                      DecoderNet(),)
+
 try:
     model.load_state_dict(torch.load(os.path.join('.', 'save', PRETRAIN)))
 except Exception as e:
     print(e)
+# load_pretrain(model, os.path.join('.', 'save', PRETRAIN))
+
+# freeze backbone
+if FREEZE:
+    freeze(model._modules['0'], False)
+
 model = torch.nn.DataParallel(model, list(range(torch.cuda.device_count()))).to(device)
 
 # 建立tensorboard的实例
@@ -66,7 +82,7 @@ writer = SummaryWriter(os.path.join(".", BOARD_PATH))
 
 # 建立优化器
 optimizer = torch.optim.Adam(model.parameters(), lr=LR)
-scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer=optimizer, milestones=[5,10,30], gamma=0.5)
+scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer=optimizer, milestones=[30,50,100,200,400,700], gamma=0.5)
 
 # 建立loss
 loss_L1 = nn.MSELoss().to(device)
@@ -76,6 +92,12 @@ loss_BCE = nn.BCELoss().to(device)
 
 # 训练的部分
 for epoch in range(EPOCHE):
+
+    if epoch is START_BACKBONE:
+        # freeze backbone
+        if FREEZE:
+            freeze(model.module._modules["0"], True)
+
     for step, teget_dic in enumerate(train_loader):
         target_image = teget_dic['target_image']
         target_mask = teget_dic['target_mask']
@@ -120,7 +142,8 @@ for epoch in range(EPOCHE):
                 print_speed(epoch*train_lenth + step + 1, avg.step_time.avg, EPOCHE * train_lenth)
 
     # save model
-    torch.save(model.state_dict(), os.path.join('.', SAVE_PATH, 'model_second_epoch_{}.pkl'.format(epoch)))
+    if (epoch+1) % 10 == 0:
+        torch.save(model.state_dict(), os.path.join('.', SAVE_PATH, 'model_second_epoch_{}.pkl'.format(epoch)))
 
     # scheduler更新
     scheduler.step()
