@@ -12,7 +12,7 @@ from model_load import remove_prefix
 
 # init train parameter
 SAVE_PATH = 'save'
-SAVE_NAME = 'model_epoch_01.pkl'
+SAVE_NAME = 'model_epoch_309.pkl'
 TARGET_IMAGE_PATH = 'test'
 
 # cuda
