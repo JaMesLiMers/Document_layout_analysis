@@ -2,15 +2,21 @@
 
 Implementation code for document layout analysis
 
-This work is implemented by "Machine intresting behavor Lab" Team
+This work is implemented by "Machine fancy behavor Lab" Team
 
-Presentation link: https://pan.baidu.com/s/1qk9LP3zi6xX4V2sB-3PBiQ code: dumw
+Presentation:
 
-PPT link: https://pan.baidu.com/s/1kgwZ5_-apCpG-W_EnuPW-g code: q1kv 
+link: https://pan.baidu.com/s/1qk9LP3zi6xX4V2sB-3PBiQ code: dumw
+
+PPT:
+
+link: https://pan.baidu.com/s/1kgwZ5_-apCpG-W_EnuPW-g code: q1kv 
 
 contect us: 
  
-yiming.lin17@xjtlu.edu.cn
+- yiming.lin17@xjtlu.edu.cn
+- jicen.yu17@xjtlu.edu.cn
+- yeyun.zou17@xjtlu.edu.cn
 
 ## Contents
 1. [Environment Setup](#environment-setup)
