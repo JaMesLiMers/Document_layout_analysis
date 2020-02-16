@@ -1,10 +1,22 @@
-# Hakathon_layout_analysis
+# Document_layout_analysis
 
 Implementation code for document layout analysis
 
-Presentation link: https://pan.baidu.com/s/1qk9LP3zi6xX4V2sB-3PBiQ code: dumw
+This work is implemented by "Machine fancy behavour Lab" Team
 
-PPT link: https://pan.baidu.com/s/1kgwZ5_-apCpG-W_EnuPW-g code: q1kv 
+Presentation:
+
+link: https://pan.baidu.com/s/1qk9LP3zi6xX4V2sB-3PBiQ code: dumw
+
+PPT:
+
+link: https://pan.baidu.com/s/1kgwZ5_-apCpG-W_EnuPW-g code: q1kv 
+
+contect us: 
+ 
+- yiming.lin17@student.xjtlu.edu.cn
+- jicen.yu17@student.xjtlu.edu.cn
+- yeyun.zou17@student.xjtlu.edu.cn
 
 ## Contents
 1. [Environment Setup](#environment-setup)
@@ -26,6 +38,13 @@ pip install -r requirements.txt
 ```
 
 ## Demo
+
+<div align="center">
+  <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/Image/XJTLU_d00007.jpg" width="200px" />
+  <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/Output/result_6.png" width="200px" />
+  <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/Output/result_second_6.png" width="200px" />
+</div>
+
 - [Setup](#environment-setup) your environment
 - Download the trained model and put into Hakathon_layout_analysis/save/
 - trained model avaliable in:
