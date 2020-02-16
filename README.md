@@ -1,4 +1,4 @@
-# Hakathon_layout_analysis
+# Document_layout_analysis
 
 Implementation code for document layout analysis
 
