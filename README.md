@@ -2,7 +2,7 @@
 
 Implementation code for document layout analysis
 
-This work is implemented by "Machine fancy behavor Lab" Team
+This work is implemented by "Machine fancy behavour Lab" Team
 
 Presentation:
 
@@ -14,9 +14,9 @@ link: https://pan.baidu.com/s/1kgwZ5_-apCpG-W_EnuPW-g code: q1kv
 
 contect us: 
  
-- yiming.lin17@xjtlu.edu.cn
-- jicen.yu17@xjtlu.edu.cn
-- yeyun.zou17@xjtlu.edu.cn
+- yiming.lin17@student.xjtlu.edu.cn
+- jicen.yu17@student.xjtlu.edu.cn
+- yeyun.zou17@student.xjtlu.edu.cn
 
 ## Contents
 1. [Environment Setup](#environment-setup)
