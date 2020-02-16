@@ -26,6 +26,13 @@ pip install -r requirements.txt
 ```
 
 ## Demo
+
+<div align="center">
+  <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/Image/XJTLU_d00007.jpg" width="200px" />
+  <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/Output/result_6.png" width="200px" />
+  <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/Output/result_second_6.png" width="200px" />
+</div>
+
 - [Setup](#environment-setup) your environment
 - Download the trained model and put into Hakathon_layout_analysis/save/
 - trained model avaliable in:
