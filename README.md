@@ -39,7 +39,7 @@ pip install -r requirements.txt
 
 ## Demo
 
-- Some of ouf model structure
+- Some of ouf model structure and performance
 
 <div align="center">
   <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/log/model_2.png" width="300px" />
