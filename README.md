@@ -39,6 +39,13 @@ pip install -r requirements.txt
 
 ## Demo
 
+- Some of ouf model structure
+
+<div align="center">
+  <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/log/model_2.png" width="300px" />
+  <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/log/model_1.png" width="300px" />
+</div>
+
 <div align="center">
   <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/Image/XJTLU_d00007.jpg" width="200px" />
   <img src="https://github.com/JaMesLiMers/Hakathon_layout_analysis/blob/master/test/Output/result_6.png" width="200px" />
