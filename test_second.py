@@ -9,11 +9,13 @@ import numpy as np
 from backbone_second import DecoderNet, EncoderNet
 from Dataset_second import ModelDataset
 from model_load import remove_prefix
+import visualization as viz
 
 # init train parameter
 SAVE_PATH = 'save'
 SAVE_NAME = 'model_second_epoch_409.pkl'
 TARGET_IMAGE_PATH = 'test'
+LOG_DIR = './test/log'
 
 # cuda
 use_cuda = torch.cuda.is_available()
@@ -60,6 +62,9 @@ if SAVE_NAME:
 for num, i in enumerate(train_set):
     x = torch.Tensor(i['target_image'][np.newaxis, :, :, :])
     output = model(x)
+
+    if num == 0:
+        viz.log_grad_graph(model, x, 'model_2', LOG_DIR)
 
     _, pred = torch.topk(output, 1, dim=1)
 

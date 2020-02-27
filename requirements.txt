@@ -6,3 +6,4 @@ matplotlib
 colorama
 cython
 tensorboardX
+torchviz
